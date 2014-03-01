@@ -1,0 +1,13 @@
+<h1>Find company</h1>
+<%= form_tag("/find", method: "get") do %>
+  <%= label_tag(:name, "Enter company name:") %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag("Find") %>
+<% end %>
+
+<% if @company %>
+  <%= content_tag(:p, @company, escape: true) %>
+<% elsif @error && params[:name] %>
+  <%= content_tag(:p, @error, escape: true) %>
+<% end %>
+
