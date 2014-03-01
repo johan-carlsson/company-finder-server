@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ActiveSupport	test/test_helper.rb	/^class ActiveSupport::TestCase$/;"	c
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:CompanyFinderServer
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+BackendError	app/services/company_backend.rb	/^class BackendError < RuntimeError;end$/;"	c
+CompaniesController	app/controllers/companies_controller.rb	/^class CompaniesController < ApplicationController$/;"	c
+CompaniesControllerTest	test/controllers/companies_controller_test.rb	/^class CompaniesControllerTest < ActionController::TestCase$/;"	c
+Company	app/models/company.rb	/^class Company$/;"	c
+CompanyBackend	app/services/company_backend.rb	/^class CompanyBackend$/;"	c	class:BackendError
+CompanyBackendTest	test/services/company_backend_test.rb	/^class CompanyBackendTest < ActiveSupport::TestCase$/;"	c
+CompanyCache	app/models/company_cache.rb	/^class CompanyCache < ActiveRecord::Base$/;"	c
+CompanyCacheTest	test/models/company_cache_test.rb	/^class CompanyCacheTest < ActiveSupport::TestCase$/;"	c
+CompanyFinderServer	config/application.rb	/^module CompanyFinderServer$/;"	m
+CompanyTest	test/models/company_test.rb	/^class CompanyTest < ActiveSupport::TestCase$/;"	c
+CreateCompanyCaches	db/migrate/20140301101642_create_company_caches.rb	/^class CreateCompanyCaches < ActiveRecord::Migration$/;"	c
+backend	app/models/company.rb	/^  def self.backend$/;"	F	class:Company
+cache	app/models/company.rb	/^  def self.cache$/;"	F	class:Company
+change	db/migrate/20140301101642_create_company_caches.rb	/^  def change$/;"	f	class:CreateCompanyCaches
+find	app/controllers/companies_controller.rb	/^  def find $/;"	f	class:CompaniesController
+find_by_name	app/models/company.rb	/^  def self.find_by_name(name)$/;"	F	class:Company
+find_company_by_name	app/services/company_backend.rb	/^  def self.find_company_by_name(name)$/;"	F	class:BackendError.CompanyBackend
+getAntAnst	test/fixtures/Redpill.html	/^function getAntAnst() { return ''; }$/;"	f
+getJurnamn	test/fixtures/Redpill.html	/^function getJurnamn() { return ''; }$/;"	f
+getLKod	test/fixtures/Redpill.html	/^function getLKod() { return '1'; }$/;"	f
+getOrt	test/fixtures/Redpill.html	/^function getOrt() { return 'Solna'; }$/;"	f
+getRegion	test/fixtures/Redpill.html	/^function getRegion() { return 'Stockholms län'; }$/;"	f
+initialize	app/models/company.rb	/^  def initialize(name,identity)$/;"	f	class:Company
+store_company	app/models/company_cache.rb	/^  def self.store_company!(company)$/;"	F	class:CompanyCache
+to_s	app/models/company.rb	/^  def to_s$/;"	f	class:Company
+to_s	app/models/company_cache.rb	/^  def to_s$/;"	f	class:CompanyCache
