@@ -17,3 +17,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :test do
+  gem 'mocha'
+  gem 'debugger'
+end
