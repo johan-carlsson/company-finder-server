@@ -20,14 +20,14 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "should find in xml format" do
     get :find, format: :xml, name: "A company"
-    xml=<<-XML
+    expected=<<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <company>
   <name>A company</name>
   <identity>123-456</identity>
 </company>
     XML
-    assert_equal xml,@response.body
+    assert_equal expected,@response.body
   end
 
   test "should not assign company if name param is missing" do
@@ -56,7 +56,7 @@ class CompaniesControllerTest < ActionController::TestCase
     Company.stub :find_by_name, nil do
       get :find, format: :json,  name: "Not a valid company"
       assert_response :not_found
-      assert_equal %Q({"error":"Not Found"}),@response.body
+      assert_equal %Q({"error":"Not found"}),@response.body
     end
   end  
 
@@ -64,17 +64,81 @@ class CompaniesControllerTest < ActionController::TestCase
     Company.stub :find_by_name, nil do
       get :find, format: :xml,  name: "Not a valid company"
       assert_response :not_found
-      xml=<<-XML
+      expected=<<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <company>
-  <error>Not Found</error>
+  <error>Not found</error>
 </company>
       XML
-      assert_equal xml,@response.body
+      assert_equal expected,@response.body
     end
   end  
 
-  # TODO Should handle ActiveRecordErrors
-  # TODO Should handle CompanyBackendErrors
+  test "should handle BackendErrors" do
+    Company.stubs(:find_by_name).raises(BackendError) do 
+      assert_raises(BackendError) { 
+        get :find, name: "Not cached"
+      }
+    assert_equal "Backend error", assigns(:error)
+    end
+  end
+
+  test "should handle BackendErrors using json" do
+    Company.stubs(:find_by_name).raises(BackendError) do 
+      get :find, name: "Not cached", format: :json
+      assert_response :internal_server_error 
+      assert_equal %Q({"error":"Backend error"}), @response.body
+    end
+  end
+
+  test "should handle BackendErrors using xml" do
+    Company.stubs(:find_by_name).raises(BackendError) do 
+      get :find, name: "Not cached", format: :xml
+
+      expected=<<-XML
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<company>
+  <error>Backend error</error>
+</company>
+      XML
+
+      assert_response :internal_server_error 
+      assert_equal expected, @response.body
+    end
+  end
+
+  test "should handle internal errors" do
+    Company.stubs(:find_by_name).raises(Exception) do 
+      assert_raises(Exception) { 
+        get :find, name: "Not cached"
+      }
+      assert_equal "Internal error", assigns(:error)
+    end
+  end
+
+  test "should handle internal errors using json" do
+    Company.stubs(:find_by_name).raises(Exception) do 
+      get :find, name: "Not cached", format: :json
+      assert_response :internal_server_error 
+      assert_equal %Q({"error":"Internal error"}), @response.body
+    end
+  end
+
+
+  test "should handle InternalErrors using xml" do
+    Company.stubs(:find_by_name).raises(Exception) do 
+      get :find, name: "Not cached", format: :xml
+
+      expected=<<-XML
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<company>
+  <error>Internal error</error>
+</company>
+      XML
+
+      assert_response :internal_server_error 
+      assert_equal expected, @response.body
+    end
+  end
 
 end

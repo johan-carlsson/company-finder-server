@@ -1,10 +1,21 @@
+class BackendError < RuntimeError;end
 class CompaniesController < ApplicationController
   # GET /companies/find
   def find 
-    #TODO Handle errors
-    @company = Company.find_by_name(params[:name])
+    begin
+     @company = Company.find_by_name(params[:name])
+    rescue BackendError
+     @error = "Backend error" 
+     @status = :internal_server_error
+    rescue Exception
+      @error = "Internal error"
+      @status = :internal_server_error
+    end
 
-    @error="Not Found" unless @company
+    unless @company
+      @error||="Not found"
+      @status||=:not_found
+    end
 
     respond_to do |format|
       format.html
@@ -12,8 +23,8 @@ class CompaniesController < ApplicationController
         format.json 
         format.xml
       else
-        format.json {render json: {error: @error}, status: :not_found}
-        format.xml {render xml: {error: @error}.to_xml(root: "company"), status: :not_found}
+        format.json {render json: {error: @error}, status: @status}
+        format.xml {render xml: {error: @error}.to_xml(root: "company"), status: @status}
       end
      end
   end
