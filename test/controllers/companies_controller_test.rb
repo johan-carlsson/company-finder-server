@@ -2,6 +2,7 @@ require 'test_helper'
 require 'minitest/mock'
 
 class CompaniesControllerTest < ActionController::TestCase
+
   setup do
     @company=Company.new("A company","123-456")
     CompanyCache.store_company!(@company)
