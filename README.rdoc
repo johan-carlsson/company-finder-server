@@ -3,22 +3,33 @@ Fetches company identity numbers from http://www.allabolag.se/ using a minimalis
 
 Supported formats are HTML, XML, and JSON.
 
-= Install
+= Install using Vagrant
+Download and install Vagrant http://www.vagrantup.com and VirtualBox https://www.virtualbox.org
+
+Run the following commands, from this folder, to setup an virtual machine 
+ vagrant up
+ 
+Start up the rails server using:
+ vagrant ssh
+ cd /vagrant
+ bin/rails server
+
+
+= Install(Wihtout Vagrant)
 This application uses Ruby 2.1.1 installed by Rvm https://rvm.io. The Ruby version used by Rvm is detected by the shell using .ruby-version file. We also use a separate gemset to isolate the environment, the gemset name is specified in .ruby-gemset
 
 Run the following commands to install requirements and to setup the application:
- * curl -sSL https://get.rvm.io | bash -s stable
- * rvm install 2.1.1
- * cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
- * bin/bundle install
- * bin/rake db:setup
+  curl -sSL https://get.rvm.io | bash -s stable
+  rvm install 2.1.1
+  cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
+  bin/bundle install
+  bin/rake db:setup
 
 Start the server using:
-  * bin/rails server
+  bin/rails server
 
 = TODOs
  * Improve UI
- * Change database
  * Don't use both minitest/mock and mocha
  * The CompanyCache#name attribute is a bit misleading. It's is actually the search term
 
