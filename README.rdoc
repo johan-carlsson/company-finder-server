@@ -1,28 +1,17 @@
 == README
+Fetches company identity numbers from http://www.allabolag.se/ using a minimalistic interface. The result is cached in a database.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Supported formats are HTML, XML, and JSON.
 
-Things you may want to cover:
+= Install
+This application uses Ruby 2.1.1 installed by Rvm https://rvm.io. The Ruby version used by Rvm is detected by the shell using .ruby-version file. We also use a separate gemset to isolate the environment, the gemset name is specified in .ruby-gemset
 
-* Ruby version
+Run the flowing commands to install requirement and to setup the application:
+ * curl -sSL https://get.rvm.io | bash -s stable
+ * rvm install 2.1.1
+ * cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
+ * bin/bundle install
+ * bin/rake db:setup
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Start the server using:
+  * bin/rails server
