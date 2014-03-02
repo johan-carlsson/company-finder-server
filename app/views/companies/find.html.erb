@@ -1,4 +1,4 @@
-<h1>Find company</h1>
+<h1>Find company identity number</h1>
 <%= form_tag("/find", method: "get") do %>
   <%= label_tag(:name, "Enter company name:") %>
   <%= text_field_tag(:name) %>
@@ -6,8 +6,18 @@
 <% end %>
 
 <% if @company %>
-  <%= content_tag(:p, @company, escape: true) %>
+<p>
+  <strong>Search for name:</strong>
+  <%= @company.name %>
+</p>
+<p>
+  <strong>Found identity number:</strong>
+  <%= @company.identity %>
+</p>
 <% elsif @error && params[:name] %>
-  <%= content_tag(:p, @error, escape: true) %>
+  <p style="color:red">
+   <strong>Error message:</strong>
+   <%= @error %>
+  </p> 
 <% end %>
 
