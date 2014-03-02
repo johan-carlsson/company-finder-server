@@ -25,4 +25,5 @@ class Company
     # Find in cache OR find in backend and store in cache
     cache.find_by_name(name) || ((found=backend.find_company_by_name(name)) && cache.store_company!(found))
   end
+
 end

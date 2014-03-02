@@ -14,8 +14,7 @@ Start up the rails server using:
  cd /vagrant
  bin/rails server
 
-
-= Install(Wihtout Vagrant)
+= Install without Vagrant
 This application uses Ruby 2.1.1 installed by Rvm https://rvm.io. The Ruby version used by Rvm is detected by the shell using .ruby-version file. We also use a separate gemset to isolate the environment, the gemset name is specified in .ruby-gemset
 
 Run the following commands to install requirements and to setup the application:

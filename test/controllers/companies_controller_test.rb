@@ -124,7 +124,6 @@ class CompaniesControllerTest < ActionController::TestCase
     end
   end
 
-
   test "should handle InternalErrors using xml" do
     Company.stubs(:find_by_name).raises(Exception) do 
       get :find, name: "Not cached", format: :xml

@@ -7,7 +7,6 @@ class CompanyTest < ActiveSupport::TestCase
     @backend = Minitest::Mock.new
   end
 
-
   test "should be initialized by name and identity" do 
     company=Company.new("A Company","123-456") 
     assert_equal company.name,"A Company"
@@ -26,7 +25,6 @@ class CompanyTest < ActiveSupport::TestCase
   test "should have a backend service" do 
     assert_equal Company.backend,CompanyBackend
   end
-
 
   test "find_by_name should find in cache" do 
     Company.stub :cache, @cache do
@@ -78,6 +76,4 @@ class CompanyTest < ActiveSupport::TestCase
     end
   end
 
-  # Can raise ActiveRecordErrors
-  # Can raise BackendErrors
 end

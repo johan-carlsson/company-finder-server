@@ -22,4 +22,5 @@ class CompanyCacheTest < ActiveSupport::TestCase
       CompanyCache.store_company!(company)
     end
   end
+
 end
