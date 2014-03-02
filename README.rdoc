@@ -6,7 +6,7 @@ Supported formats are HTML, XML, and JSON.
 = Install
 This application uses Ruby 2.1.1 installed by Rvm https://rvm.io. The Ruby version used by Rvm is detected by the shell using .ruby-version file. We also use a separate gemset to isolate the environment, the gemset name is specified in .ruby-gemset
 
-Run the flowing commands to install requirement and to setup the application:
+Run the following commands to install requirements and to setup the application:
  * curl -sSL https://get.rvm.io | bash -s stable
  * rvm install 2.1.1
  * cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
@@ -15,3 +15,10 @@ Run the flowing commands to install requirement and to setup the application:
 
 Start the server using:
   * bin/rails server
+
+= TODOs
+ * Improve UI
+ * Change database
+ * Don't use both minitest/mock and mocha
+ * The CompanyCache#name attribute is a bit misleading. It's is actually the search term
+
