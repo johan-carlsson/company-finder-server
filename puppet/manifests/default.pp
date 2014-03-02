@@ -74,6 +74,7 @@ exec { 'install_rvm':
 
 exec { 'install_ruby':
   command => "${as_vagrant} '${home}/.rvm/bin/rvm install 2.1.1 && rvm alias create default 2.1.1'",
+  timeout => 1800,
   creates => "${home}/.rvm/bin/ruby",
   require => Exec['install_rvm']
 }
@@ -86,6 +87,7 @@ exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
 # Company finder
 exec { 'setup company-finder-server':
   command => "${as_vagrant} 'rvm use 2.1.1@company-finder --create;cd /vagrant/;bundle install;rake db:setup;'",
+  timeout => 1800,
   require => Exec['install_rvm']
 }
 
