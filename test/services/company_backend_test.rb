@@ -18,7 +18,7 @@ class CompanyBackendTest < ActiveSupport::TestCase
 
   test "should find company by name" do
     company=Company.new("A company","123-456")
-    CompanyBackend.stub :scrape_identity, "123-456" do
+    CompanyBackend.stub :scrape_for_identity, "123-456" do
       result=CompanyBackend.find_company_by_name("A company")
       assert_equal company.to_s, result.to_s
     end

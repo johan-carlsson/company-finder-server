@@ -6,26 +6,24 @@ class CompanyBackend
 
   def self.find_company_by_name(name)
     begin
-      identity=self.scrape_identity(name)
+      if(found=self.scrape_for_identity(name))
+        Rails.logger.info("CompanyBackend found: #{found} for: #{name}")
+        company=Company.new(name,found) 
+      else
+        Rails.logger.info("CompanyBackend could not find: #{name}")
+      end
     rescue => e
       Rails.logger.error("ERROR: Failed to scrape identity for: #{name} excpetion: #{e}")
       raise BackendError, e
     end
 
-    if identity
-      Rails.logger.info("CompanyBackend found: #{identity} for: #{name}")
-      company=Company.new(name,identity) 
-    else
-      Rails.logger.info("CompanyBackend could not find: #{name}")
-    end
-
     return company
   end  
 
-  def self.scrape_identity(name)
-    uri_for(name).open {|f|
+  def self.scrape_for_identity(name)
+    uri_for(name).open do |f|
       parse(f.read)
-    }
+    end
   end
 
   def self.uri_for(name)
@@ -39,7 +37,7 @@ class CompanyBackend
   def self.parse(html)
     page=Nokogiri::HTML(html)
 
-    #This ain't pretty
+    # This ain't pretty
     identity_node=page.xpath("//span[text()='Org.nummer:']/../text()")[1]
     identity_node.text.strip if identity_node
   end

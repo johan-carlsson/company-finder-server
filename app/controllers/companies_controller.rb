@@ -23,9 +23,9 @@ class CompaniesController < ApplicationController
         format.json 
         format.xml
       else
-        format.json {render json: {error: @error}, status: @status}
-        format.xml {render xml: {error: @error}.to_xml(root: "company"), status: @status}
+        format.json { render json: { error: @error }, status: @status }
+        format.xml { render xml: { error: @error }.to_xml(root: "company"), status: @status }
       end
-     end
+    end
   end
 end
