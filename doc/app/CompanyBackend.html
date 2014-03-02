@@ -73,13 +73,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-c-find_company_by_name">::find_company_by_name</a>
-    
-    <li ><a href="#method-c-parse">::parse</a>
-    
-    <li ><a href="#method-c-scrape_for_identity">::scrape_for_identity</a>
-    
-    <li ><a href="#method-c-uri_for">::uri_for</a>
+    <li ><a href="#method-i-find_company_by_name">#find_company_by_name</a>
     
   </ul>
 </div>
@@ -123,13 +117,13 @@
     
 
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Class Methods</h3>
+         <h3>Public Instance Methods</h3>
        </header>
 
     
-      <div id="method-c-find_company_by_name" class="method-detail ">
+      <div id="method-i-find_company_by_name" class="method-detail ">
         
         <div class="method-heading">
           <span class="method-name">find_company_by_name</span><span
@@ -149,9 +143,9 @@
           
           <div class="method-source-code" id="find_company_by_name-source">
             <pre><span class="ruby-comment"># File app/services/company_backend.rb, line 7</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_company_by_name</span>(<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">find_company_by_name</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-keyword">if</span>(<span class="ruby-identifier">found</span>=<span class="ruby-keyword">self</span>.<span class="ruby-identifier">scrape_for_identity</span>(<span class="ruby-identifier">name</span>))
+    <span class="ruby-keyword">if</span>(<span class="ruby-identifier">found</span>=<span class="ruby-identifier">scrape_for_identity</span>(<span class="ruby-identifier">name</span>))
       <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;CompanyBackend found: #{found} for: #{name}&quot;</span>)
       <span class="ruby-identifier">company</span>=<span class="ruby-constant">Company</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">found</span>) 
     <span class="ruby-keyword">else</span>
@@ -163,116 +157,6 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">company</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-parse" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">parse</span><span
-            class="method-args">(html)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>&lt;td class=“text11grey6”&gt;</p>
-
-<pre>&lt;span class=&quot;bold11grey6&quot;&gt;Org.nummer:&lt;/span&gt; 556641-0576&lt;br&gt;
-&lt;span class=&quot;bold11grey6&quot;&gt;Verksamhet:&lt;/span&gt; Utgivning av annan programvara&lt;br&gt;</pre>
-
-<p>&lt;/td&gt;</p>
-          
-          
-
-          
-          <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File app/services/company_backend.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">html</span>)
-  <span class="ruby-identifier">page</span>=<span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>(<span class="ruby-identifier">html</span>)
-
-  <span class="ruby-comment"># This ain&#39;t pretty</span>
-  <span class="ruby-identifier">identity_node</span>=<span class="ruby-identifier">page</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">&quot;//span[text()=&#39;Org.nummer:&#39;]/../text()&quot;</span>)[<span class="ruby-value">1</span>]
-  <span class="ruby-identifier">identity_node</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">identity_node</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-scrape_for_identity" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">scrape_for_identity</span><span
-            class="method-args">(name)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="scrape_for_identity-source">
-            <pre><span class="ruby-comment"># File app/services/company_backend.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scrape_for_identity</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-identifier">uri_for</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">open</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-c-uri_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">uri_for</span><span
-            class="method-args">(name)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="uri_for-source">
-            <pre><span class="ruby-comment"># File app/services/company_backend.rb, line 29</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">uri_for</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-node">&quot;#{BASE_URL}/?what=#{name}&quot;</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           

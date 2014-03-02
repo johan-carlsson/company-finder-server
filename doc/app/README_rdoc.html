@@ -59,7 +59,8 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-README">README</a>
-    <li><a href="#label-Install">Install</a>
+    <li><a href="#label-Install+using+Vagrant">Install using Vagrant</a>
+    <li><a href="#label-Install+without+Vagrant">Install without Vagrant</a>
     <li><a href="#label-TODOs">TODOs</a>
   </ul>
 </div>
@@ -89,7 +90,23 @@ interface. The result is cached in a database.</p>
 
 <p>Supported formats are HTML, XML, and JSON.</p>
 
-<h1 id="label-Install">Install<span><a href="#label-Install">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h1 id="label-Install+using+Vagrant">Install using Vagrant<span><a href="#label-Install+using+Vagrant">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>Download and install Vagrant <a
+href="http://www.vagrantup.com">www.vagrantup.com</a> and VirtualBox <a
+href="https://www.virtualbox.org">www.virtualbox.org</a></p>
+
+<p>Run the following commands, from this folder, to setup an virtual machine</p>
+
+<pre>vagrant up</pre>
+
+<p>Start up the rails server using:</p>
+
+<pre>vagrant ssh
+cd /vagrant
+bin/rails server</pre>
+
+<h1 id="label-Install+without+Vagrant">Install without Vagrant<span><a href="#label-Install+without+Vagrant">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
 <p>This application uses Ruby 2.1.1 installed by Rvm <a
 href="https://rvm.io">rvm.io</a>. The Ruby version used by Rvm is detected
@@ -99,20 +116,19 @@ isolate the environment, the gemset name is specified in .ruby-gemset</p>
 <p>Run the following commands to install requirements and to setup the
 application:</p>
 
-<pre>* curl -sSL https://get.rvm.io | bash -s stable
-* rvm install 2.1.1
-* cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
-* bin/bundle install
-* bin/rake db:setup</pre>
+<pre>curl -sSL https://get.rvm.io | bash -s stable
+rvm install 2.1.1
+cd company-finder-server (This command makes sure that Rvm load the correct ruby and getset) 
+bin/bundle install
+bin/rake db:setup</pre>
 
 <p>Start the server using:</p>
 
-<pre>* bin/rails server</pre>
+<pre>bin/rails server</pre>
 
 <h1 id="label-TODOs">TODOs<span><a href="#label-TODOs">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
 <pre>* Improve UI
-* Change database
 * Don&#39;t use both minitest/mock and mocha
 * The CompanyCache#name attribute is a bit misleading. It&#39;s is actually the search term</pre>
 </main>
