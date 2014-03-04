@@ -4,8 +4,8 @@ require 'minitest/mock'
 class CompaniesControllerTest < ActionController::TestCase
 
   setup do
-    @company=Company.new("A company","123-456")
-    CompanyCache.store_company!(@company)
+    company=Company.new("A company","123-456")
+    CompanyCache.store_company!(company)
   end
 
   test "should find company" do
@@ -21,6 +21,7 @@ class CompaniesControllerTest < ActionController::TestCase
 
   test "should find in xml format" do
     get :find, format: :xml, name: "A company"
+
     expected=<<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <company>
@@ -28,6 +29,7 @@ class CompaniesControllerTest < ActionController::TestCase
   <identity>123-456</identity>
 </company>
     XML
+
     assert_equal expected,@response.body
   end
 
@@ -65,12 +67,14 @@ class CompaniesControllerTest < ActionController::TestCase
     Company.stub :find_by_name, nil do
       get :find, format: :xml,  name: "Not a valid company"
       assert_response :not_found
+
       expected=<<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <company>
   <error>Not found</error>
 </company>
       XML
+
       assert_equal expected,@response.body
     end
   end  
