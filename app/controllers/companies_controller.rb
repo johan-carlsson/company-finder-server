@@ -1,4 +1,4 @@
-class BackendError < RuntimeError;end
+require 'company_backend'
 class CompaniesController < ApplicationController
   # GET /companies/find
   def find 
