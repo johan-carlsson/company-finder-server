@@ -4,10 +4,12 @@ class CompaniesController < ApplicationController
   def find 
     begin
      @company = Company.find_by_name(params[:name])
-    rescue BackendError
+    rescue BackendError => e
+     logger.warn "BackendError: #{e}"
      @error = "Backend error" 
      @status = :internal_server_error
-    rescue Exception
+    rescue Exception => e
+      logger.error "InternalError: #{e}"
       @error = "Internal error"
       @status = :internal_server_error
     end
